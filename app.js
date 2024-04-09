@@ -13,7 +13,7 @@ const orderRoutes = require('./routes/orderRoutes');
 // Initialize Express app
 const app = express();
 
-// Connect to MongoDB
+// Connect to MongoDB 
 mongoose.connect('mongodb+srv://nkhanpara9106:4FZHlWK1rUKcxlXP@webassignment4.x77wjeh.mongodb.net/WebAssignment4', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
