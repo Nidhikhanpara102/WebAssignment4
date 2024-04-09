@@ -12,3 +12,19 @@ const orderSchema = new mongoose.Schema({
   shippingAddress: String,
   orderDate: { type: Date, default: Date.now }
 });
+
+// Recalculate totalAmount before updating
+orderSchema.pre('findOneAndUpdate', function(next) {
+  
+  // Calculate total price based on updated products and their quantity
+  let totalPrice = this._update.products.reduce((total, product) => {
+    return total + (product.quantity * product.price);
+  }, 0);
+
+  // Update totalAmount in the document
+  this._update.totalAmount = totalPrice;
+
+  next();
+});
+
+module.exports = mongoose.model('Order', orderSchema);
